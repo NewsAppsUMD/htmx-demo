@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"
         <script src="static/htmx.min.js"></script>
     </head>
     <body>
@@ -14,8 +14,7 @@
             <h1>Browse and Search Course Listings</h1>
             <p></p>
             <h3><a href="/terms">Terms</a></h3>
-            <h3><a href="/departments">Departments</a></h3>
-            <h3>Search<h3>
+            <h3>Search</h3>
                 <form hx-post="/search" hx-trigger="submit" hx-target="#results">
                     <input type="text" name="query" placeholder="Search by title" required>
                     <button type="submit">Search</button>
@@ -23,6 +22,27 @@
 
                 <div id="results"></div>
 
+            <h3>Courses in {{ department }}</h3>
+            <table class="table table-sm">
+             <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Term</th>
+                <th>Department</th>
+                <th>Description</th>
+            </tr>
+            <tbody>
+            {% for course in courses %}
+              <tr>
+                <td>{{ course.id }}</td>
+                <td>{{ course.title }}</td>
+                <td>{{ course.term }}</td>
+                <td>{{ course.department }}</td>
+                <td>{{ course.description }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+            </table>
         </div>
      </div>
     </body>

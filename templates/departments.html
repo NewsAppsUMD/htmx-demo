@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"
         <script src="static/htmx.min.js"></script>
     </head>
     <body>
@@ -14,7 +14,6 @@
             <h1>Browse and Search Course Listings</h1>
             <p></p>
             <h3><a href="/terms">Terms</a></h3>
-            <h3><a href="/departments">Departments</a></h3>
             <h3>Search<h3>
                 <form hx-post="/search" hx-trigger="submit" hx-target="#results">
                     <input type="text" name="query" placeholder="Search by title" required>
@@ -23,6 +22,22 @@
 
                 <div id="results"></div>
 
+            <h3>Departments</h3>
+            <div class="row">
+                <div class="col-md-4">
+                <ul class="list-unstyled">
+                    {% for department in departments %}
+                        <li><a href="departments/{{ department.department }}">{{ department.department }}</a></li>
+                        {% if loop.index % 3 == 0 and not loop.last %}
+                        </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="list-unstyled">
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
      </div>
     </body>
